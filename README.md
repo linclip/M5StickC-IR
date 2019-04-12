@@ -1,41 +1,41 @@
 # M5StickC-IR
 =====
-## ����͉�
+## これは何
 
-M5StickC�ɓ������ꂽ�ԊO��LED���g�p���ĉƓd�̃����R���Ƃ��Ďg����悤�ɂ��܂��B
+M5StickCに内蔵された赤外線LEDを使用して家電のリモコンとして使えるようにします。
 
 
-## �g����
+## 使い方
 
-���߂ēd��������ƃA�N�Z�X�|�C���g���[�h�ŋN������̂ŁA�X�}�z�ȂǂŁu M5StickC-WiFi �v�ɐڑ��B
+初めて電源を入れるとアクセスポイントモードで起動するので、スマホなどで「 M5StickC-WiFi 」に接続。
 
-�E�F�u�u���E�U�Łu 192.168.4.1 �v���J���A�g�p���Ă���WiFi���[�^�[/�A�N�Z�X�|�C���g�Ȃǂ�SSID�ƃp�X���[�h����͂���Ok�B
+ウェブブラウザで「 192.168.4.1 」を開き、使用しているWiFiルーター/アクセスポイントなどのSSIDとパスワードを入力してOk。
 
-�ċN������ƁA�w���WiFi�ɐڑ������B
+再起動すると、指定のWiFiに接続される。
 
-M5StickC�{�̂�LCD�ɕ\�������IP�A�h���X�ɃE�F�u�u���E�U�ŃA�N�Z�X�B�f�[�^���M�A�{��LED��ON/OFF�Ȃǂ��s����B
+M5StickC本体のLCDに表示されるIPアドレスにウェブブラウザでアクセス。データ送信、本体LEDのON/OFFなどが行える。
 
-���M�f�[�^��IRKkit�݊��B
+送信データはIRKkit互換。
 
-���M�f�[�^�̍쐬��M5StickC�{�̂������Ɩ����Ȃ̂ŁA�e��TV�𑀍�ł���E�F�u�A�v�������܂����B
+送信データの作成はM5StickC本体だけだと無理なので、各社TVを操作できるウェブアプリを作りました。
 
 http://m5.linclip.com/ir/
 
-## �Q�l�ɂ�������
+## 参考にしたもの
 
 * [minlRum](https://github.com/9SQ/minIRum)
 
 * [IRKit](http://getirkit.com/)
 
-���ɁA�f�[�^���M�Ɋւ��Ă�minlRum�̃R�[�h�����̂܂܎g�p�����Ă��������܂����B
+特に、データ送信に関してはminlRumのコードをそのまま使用させていただきました。
 
-## �Q�l�ɂ�������
+## 使用ライブラリ
 
-*https://github.com/Brunez3BD/WIFIMANAGER-ESP32
+* https://github.com/Brunez3BD/WIFIMANAGER-ESP32
 
-*https://github.com/interactive-matter/aJson
+* https://github.com/interactive-matter/aJson
 
-*https://github.com/SensorsIot/Arduino-IRremote
+* https://github.com/SensorsIot/Arduino-IRremote
 
 ## Author
 

@@ -6,7 +6,7 @@
 #include <WiFiManager.h> //https://github.com/Brunez3BD/WIFIMANAGER-ESP32
 #include <ESPmDNS.h>
 #include <WiFiClient.h>
-#include <aJSON.h>       //https://github.com/interactive-matter/aJson
+#include <aJSON.h>       //https://github.com/interactive-matter/aJson  https://gitlab.com/xarduino/lightsw/blob/master/patch/ajson-void-flush.patch
 #include <IRremote.h>    //https://github.com/SensorsIot/Arduino-IRremote
 
 WebServer webServer(80);

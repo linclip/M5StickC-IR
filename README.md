@@ -6,11 +6,13 @@ M5StickCに内蔵された赤外線LEDを使用して家電のリモコンとし
 
 ## 使い方
 
-初めて電源を入れるとアクセスポイントモードで起動するので、スマホなどで「 M5StickC-WiFi 」に接続。
+初めて電源を入れた時は接続するWiFiネットワークがされていないので、いったん電源を切って、RSTボタン（右側面）を押したまま電源を入れる。するとM5StackCがアクセスポイントモードで起動するので、スマホなどで「 M5StickC-WiFi 」に接続。
 
 ウェブブラウザで「 192.168.4.1 」を開き、使用しているWiFiルーター/アクセスポイントなどのSSIDとパスワードを入力してOk。
 
-再起動すると、指定のWiFiに接続される。
+再起動すると、M5StackCが指定したWiFiネットワークに接続される。
+
+この時点でスマホのWiFi設定を元に戻す。
 
 M5StickC本体のLCDに表示されるIPアドレスにウェブブラウザでアクセス。データ送信、本体LEDのON/OFFなどが行える。
 
@@ -42,4 +44,5 @@ http://m5.linclip.com/ir/
 * https://github.com/interactive-matter/aJson （要パッチ https://gitlab.com/xarduino/lightsw/blob/master/patch/ajson-void-flush.patch）
 
 * https://github.com/SensorsIot/Arduino-IRremote
+
 

@@ -1,3 +1,7 @@
+/*
+ * M5StickC-IR v0.0.2
+ */
+ 
 #include <M5StickC.h>
 #include <WiFi.h>
 #include <DNSServer.h>
@@ -119,15 +123,22 @@ void setup() {  // -------------------------------------------------------------
   WiFiManager wifiManager; 
 
   M5.Lcd.setTextSize(1);
-  M5.Lcd.setCursor(0,0);
-  M5.Lcd.println("AP mode: \r\nAutoConnectAP");
-  M5.Lcd.println("IP adrs: \r\n192.168.4.1");
+  M5.Lcd.setCursor(5,0);
+  //M5.Lcd.println("AP mode: \r\nAutoConnectAP");
+  //M5.Lcd.println("IP address: \r\n192.168.4.1");
+
+  M5.Lcd.println("M5StickC-IR");
+  M5.Lcd.println("\nIf you want to setup WiFi, \nPower off, \nPress Button RST \nand Power On!!!");
+  //M5.Lcd.println("IP address: \r\n192.168.4.1");
+  //delay(5000);
 
   if(digitalRead(M5_BUTTON_RST) == LOW){ //起動時RSTボタンが押されてたら
+      M5.Lcd.fillScreen(BLACK); //clear
       M5.Lcd.setTextSize(1);
-      M5.Lcd.setCursor(0,0);
-      M5.Lcd.println("AP mode: \r\nOnDemandAP");
-      M5.Lcd.println("IP adrs: \r\n192.168.4.1");
+      M5.Lcd.setCursor(5,0);
+      M5.Lcd.println("AP mode: \nOnDemandAP");
+      M5.Lcd.println("\nconnect to WiFi, \nM5StickC-AP");
+      M5.Lcd.println("\nOpen \n192.168.4.1");
 
       digitalWrite(M5_LED, LOW); //LED ON
       while(digitalRead(M5_BUTTON_RST) == LOW);
@@ -139,7 +150,7 @@ void setup() {  // -------------------------------------------------------------
         digitalWrite(M5_LED, HIGH); //LED OFF
       }
       //起動時のボタンでWiFi設定起動 WiFiManager
-      if (!wifiManager.startConfigPortal("M5StickC-WiFi")) {
+      if (!wifiManager.startConfigPortal("M5StickC-AP")) {
         Serial.println("failed to connect and hit timeout");
         delay(3000);
       }
@@ -148,23 +159,43 @@ void setup() {  // -------------------------------------------------------------
       delay(2000);
 
   } else {
-      wifiManager.autoConnect("M5StickC-WiFi"); //AutoConnectAP
+      //wifiManager.autoConnect("M5StickC-AP"); //AutoConnectAP
+      Serial.println("WiFi.begin()");
+      WiFi.begin();
+      M5.Lcd.setCursor(5,120);
+      int i = 0;
+      while (WiFi.status() != WL_CONNECTED) { //接続まで最大10秒待つ
+        if(i > 20){break;}
+        delay(500); 
+        i++;
+        Serial.print(".");
+        M5.Lcd.print(".");
+      }
+        Serial.println("!");
+        M5.Lcd.println("! ");
   }
 
   IPAddress ipadr = WiFi.localIP();
 
-  Serial.println("connected..");
-  Serial.println(WiFi.SSID());
+  if(WiFi.status() == WL_CONNECTED){
+    Serial.println("connected..");
+    M5.Lcd.println("connected..");
+    Serial.println(WiFi.SSID());
+  } else {
+    Serial.println("not connected!!!");
+    M5.Lcd.println("not connected!!!");
+  }
   
+  delay(1000); 
   M5.Lcd.fillScreen(BLACK); //clear
   M5.Lcd.setCursor(0,0);
-  M5.Lcd.println("M5StickC-WiFi");//AutoConnectAP
+  M5.Lcd.println("M5StickC-IR");//AutoConnectAP
 
-  M5.Lcd.setCursor(0,20);
-  M5.Lcd.println("SSID: ");
-  M5.Lcd.print(WiFi.SSID());
+  //M5.Lcd.setCursor(0,20);
+  //M5.Lcd.println("SSID: ");
+  //M5.Lcd.print(WiFi.SSID());
   M5.Lcd.setCursor(0,60);
-  M5.Lcd.println("IP adrs: ");
+  M5.Lcd.println("IP address: ");
   M5.Lcd.print((String)ipadr[0] + "." + (String)ipadr[1] + "." + (String)ipadr[2] + "." + (String)ipadr[3]);
 
   //mDNSの設定
@@ -202,8 +233,8 @@ void loop() {
     Serial.println("HOME");
     digitalWrite(M5_LED, LOW);  //LED ON
     irsend.sendNEC(0x02fd7887, 32); //TOSHIBA REGZA VOL DOWN 02fd7887
-    irsend.sendPanasonic(0x4004, 0x0D00FAF7); //Panasonic DIGA display 40040D00FAF7
     delay(200);
+    irsend.sendPanasonic(0x4004, 0x0D00FAF7); //Panasonic DIGA display 40040D00FAF7
     while(digitalRead(M5_BUTTON_HOME) == LOW);
     digitalWrite(M5_LED, HIGH);  //LED OFF
   }

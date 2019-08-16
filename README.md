@@ -39,9 +39,9 @@ http://m5.linclip.com/ir/
 
 ## 使用ライブラリ
 
-* https://github.com/Brunez3BD/WIFIMANAGER-ESP32
+* https://github.com/tzapu/WiFiManager/tree/development
 
-* https://github.com/interactive-matter/aJson （要パッチ https://gitlab.com/xarduino/lightsw/blob/master/patch/ajson-void-flush.patch）
+* https://github.com/interactive-matter/aJson （要パッチ https://gitlab.com/xarduino/lightsw/blob/master/patch/ajson-void-flush.patch ）
 
 * https://github.com/SensorsIot/Arduino-IRremote
 
